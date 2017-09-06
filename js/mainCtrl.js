@@ -1,6 +1,5 @@
 angular.module('chatroom').controller('mainCtrl', function( $scope, mainSrvc ){
     mainSrvc.getMessages().then( function( response ) {
-      console.log(response);
       $scope.messages = response.data;
     });
   
