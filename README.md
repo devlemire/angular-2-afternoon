@@ -263,7 +263,9 @@ In this step, we'll modify the `HTML` to make the messages sortable by the time 
   * It should default to `"-"` ( so the newest messages show first ).
 * Open `index.html`.
 * Add a `select` element with a `ng-model` of `timeSort` next to the `input` element.
-  * This `select` element should have to `option` elements. One for ascending ("+") and one for descending ("-").
+  * This `select` element should have to `option` elements. 
+    * One for ascending ("+"). 
+    * One for descending ("-").
 * Modify the `ng-repeat` to include a sort on the `createdAt` property.
 
 <details>
