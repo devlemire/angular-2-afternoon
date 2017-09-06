@@ -140,6 +140,65 @@ angular.module('chatroom').service('mainSrvc', function( $http ) {
 
 In this step, we'll modify our Angular controller to communicate with our service to get the `messages` on `$scope`.
 
+### Instructions
+
+* Open `js/mainCtrl.js`.
+* Inject `mainSrvc` into the controller.
+* Call the `getMessages` method on `mainSrvc` and capture the `response`.
+  * Create a new `$scope` variable called `messages` and set its value equal to the `data` of the `response`.
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+Let's begin by opening `js/mainCtrl.js`. In order to get access to the methods on `mainSrvc`, we'll need to inject it into our `mainCtrl`. We can do this by adding a parameter in `js/mainCtrl.js` called `mainSrvc`.
+
+```js
+angular.module('chatroom').controller('mainCtrl', function( $scope, mainSrvc ){
+
+});
+```
+
+Now the entire controller will have access to `mainSrvc`. Let's call the `getMessages` method and capture the response.
+
+```js
+angular.module('chatroom').controller('mainCtrl', function( $scope, mainSrvc ){
+  mainSrvc.getMessages().then( function( response ) {
+    
+  });
+});
+```
+
+We can then take the `data` of the response and assign it to a `$scope` value called `messages`. This will allow our `index.html` to display the `messages`.
+
+```js
+angular.module('chatroom').controller('mainCtrl', function( $scope, mainSrvc ){
+  mainSrvc.getMessages().then( function( response ) {
+    $scope.messages = response.data;
+  });
+});
+```
+
+</details>
+
+### Solution
+
+<details>
+
+<summary> <code> js/mainCtrl.js </code> </summary>
+
+```js
+angular.module('chatroom').controller('mainCtrl', function( $scope, mainSrvc ){
+  mainSrvc.getMessages().then( function( response ) {
+    $scope.messages = response.data;
+  });
+});
+```
+
+</details>
+
 ## Step 4
 
 ### Summary
