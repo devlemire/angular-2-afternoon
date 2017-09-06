@@ -374,9 +374,112 @@ In this step, we'll update the service file to have a method to post to the DevM
 
 ### Instructions
 
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+
+
+</details>
+
+### Solution
+
+<details>
+
+<summary> <code> js/mainSrvc.js </code> </summary>
+
+```js
+angular.module('chatroom').service('mainSrvc', function( $http ) {
+  this.getMessages = function() {
+    return $http({
+      method: 'GET',
+      url: 'https://practiceapi.devmountain.com/api/chats'
+    });
+  };
+
+  this.postMessage = function( msg ) {
+    return $http({
+      method: 'POST',
+      url: 'https://practiceapi.devmountain.com/api/chats',
+      data: { message: msg }
+    });
+  };
+});
+```
+
+</details>
+
+<details>
+
+<summary> <code> js/mainCtrl.js </code> </summary>
+
+```js
+angular.module('chatroom').controller('mainCtrl', function( $scope, mainSrvc ){
+    mainSrvc.getMessages().then( function( response ) {
+      $scope.messages = response.data;
+    });
+
+    $scope.timeSort = "-";
+
+    $scope.postMessage = function( msg ) {
+      mainSrvc.postMessage( msg );
+    };
+});
+```
+
+</details>
+
+<details>
+
+<summary> <code> index.html </code> </summary>
+
+```html
+<!DOCTYPE HTML>
+<html ng-app="chatroom">
+  <head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body ng-controller="mainCtrl">
+    <div class="main-container">
+      <h1> DevMountain Chat Room </h1>
+      <form ng-submit="postMessage(message)">
+        <input class="form-control text-box" type="text" ng-model="message" placeholder="Message">
+        <select ng-model="timeSort">
+          <option value="-">Newest</option>
+          <option value="+">Oldest</option>
+        </select>
+      </form>
+      <div class="messages-container">
+        <p ng-repeat="message in messages | orderBy:timeSort + message.createdAt">
+          {{ message.message }} 
+
+          {{ message.createdAt }}
+        </p>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <!-- your scripts here -->
+    <script src="js/app.js"></script>
+    <script src="js/mainCtrl.js"></script>
+    <script src="js/mainSrvc.js"></script>
+  </body>
+</html>
+```
+
+</details>
+
 ## Black Diamond
 
 * Make the app look more professional using CSS.
+* Clear the input field when sending a new message.
+* Re-fetch the messages after sending a new message.
+* Fetch messages automatically every second.
+  * Hint: setTimeout.
 
 ## Contributions
 
