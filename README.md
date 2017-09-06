@@ -374,6 +374,18 @@ In this step, we'll update the service file to have a method to post to the DevM
 
 ### Instructions
 
+* Open `js/mainSrvc.js`.
+* Add a new method called `postMessage`: 
+  * This method should have a parameter called `msg` ( this will be the string to send to the API ).
+  * This method should return a `POST` call to `https://practiceapi.devmountain.com/api/chats`.
+* Open `js/mainCtrl.js`.
+* Create a new `$scope` function called `postMessage`:
+  * This function should have a parameter called `msg` ( this will be the argument for the service method ).
+  * This function should call `mainSrvc.postMessage` with `msg` as an argument.
+* Open `index.html`.
+  * Add an `ng-submit` to the `form` element that is the parent to the `input` element.
+  * Use the `HTML` to determine what `ng-model` should be used for the argument.
+
 <details>
 
 <summary> Detailed Instructions </summary>
