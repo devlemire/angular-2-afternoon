@@ -393,7 +393,39 @@ In this step, we'll update the service file to have a method to post to the DevM
 
 <br />
 
+Let's begin by opening `js/mainSrvc.js`. We're going to add a method to that will allow us to send a new message to the DevMountain Chat API. Let's name this method `postMessage` and give it a parameter called `msg`. `msg` will be the string we send to the API.
 
+```js
+this.postMessage = function( msg ) {
+
+};
+```
+
+The API is expecting a post request at `https://practiceapi.devmountain.com/api/chats` with a request body that looks like `{ message: 'string' }`. You can include a request body by adding a `data` property in the `$http` request.
+
+```js
+this.postMessage = function( msg ) {
+  return $http({
+    method: 'POST',
+    url: 'https://practiceapi.devmountain.com/api/chats',
+    data: { message: msg }
+  });
+};
+```
+
+Now that the `service` is setup for new messages, let's open `js/mainCtrl.js` and add a new function on `$scope` that calls this method. This function should have a parameter of `msg` as well. We'll use the value of this parameter as the argument for the `postMessage` method in `js/mainSrvc.js`.
+
+```js
+$scope.postMessage = function( msg ) {
+  mainSrvc.postMessage( msg );
+};
+```
+
+Lastly, we'll just need to add an `ng-submit` on the `form` parent of the `input` element. Open `index.html` and add an `ng-submit` that calls `postMessage` with `message` as an argument. The reason we are using `message` as the argument is because it is the `ng-model` for the input element. 
+
+```html
+<form ng-submit="postMessage(message)">
+```
 
 </details>
 
