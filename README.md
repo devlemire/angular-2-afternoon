@@ -378,6 +378,7 @@ In this step, we'll update the service file to have a method to post to the DevM
 * Add a new method called `postMessage`: 
   * This method should have a parameter called `msg` ( this will be the string to send to the API ).
   * This method should return a `POST` call to `https://practiceapi.devmountain.com/api/chats`.
+  * The API is expecting the request body to look like: `{ message: 'string' }`.
 * Open `js/mainCtrl.js`.
 * Create a new `$scope` function called `postMessage`:
   * This function should have a parameter called `msg` ( this will be the argument for the service method ).
