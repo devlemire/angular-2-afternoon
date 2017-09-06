@@ -37,6 +37,8 @@ Let's begin by opening `index.html` and finding the `<!-- your scripts here -->`
 
 </details>
 
+### Solution
+
 <details>
 
 <summary> <code> index.html </code> </summary>
