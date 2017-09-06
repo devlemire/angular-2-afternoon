@@ -54,7 +54,7 @@ Let's begin by opening `index.html` and finding the `<!-- your scripts here -->`
   <body ng-controller="mainCtrl">
     <div class="main-container">
       <h1> DevMountain Chat Room </h1>
-      <form ng-submit="postMessage(message)">
+      <form>
         <input class="form-control text-box" type="text" ng-model="message" placeholder="Message">
       </form>
       <div class="messages-container">
@@ -227,7 +227,7 @@ In this step, we'll modify the `HTML` to also display what time the message was 
   <body ng-controller="mainCtrl">
     <div class="main-container">
       <h1> DevMountain Chat Room </h1>
-      <form ng-submit="postMessage(message)">
+      <form>
         <input class="form-control text-box" type="text" ng-model="message" placeholder="Message">
       </form>
       <div class="messages-container">
@@ -283,7 +283,7 @@ $scope.timeSort = "-";
 We can then open `index.html` and use a `select` element with two `option` elements to control the sorting of our messages. Let's add it next to the `input` element. We'll use `timeSort` as the `ng-model` for the `select` element. Also, don't forget that the `option` elements will need `value` attributes so they can update the `ng-model`.
 
 ```html
-<form ng-submit="postMessage(message)">
+<form>
   <input class="form-control text-box" type="text" ng-model="message" placeholder="Message">
   <select ng-model="timeSort">
     <option value="-">Newest</option>
@@ -339,7 +339,7 @@ angular.module('chatroom').controller('mainCtrl', function( $scope, mainSrvc ){
   <body ng-controller="mainCtrl">
     <div class="main-container">
       <h1> DevMountain Chat Room </h1>
-      <form ng-submit="postMessage(message)">
+      <form>
         <input class="form-control text-box" type="text" ng-model="message" placeholder="Message">
         <select ng-model="timeSort">
           <option value="-">Newest</option>
@@ -365,6 +365,14 @@ angular.module('chatroom').controller('mainCtrl', function( $scope, mainSrvc ){
 ```
 
 </details>
+
+## Step 6 
+
+### Summary
+
+In this step, we'll update the service file to have a method to post to the DevMountain Chat API. This will allow you to add your own messages. We'll then update the Angular controller to have a function on `$scope` that calls this method. Lastly, we'll update the `HTML` to be able to call this function on `$scope`.
+
+### Instructions
 
 ## Black Diamond
 
