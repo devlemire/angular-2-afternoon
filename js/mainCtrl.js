@@ -2,6 +2,8 @@ angular.module('chatroom').controller('mainCtrl', function( $scope, mainSrvc ){
     mainSrvc.getMessages().then( function( response ) {
       $scope.messages = response.data;
     });
+
+    $scope.timeSort = "-";
   
     //The postMessage function will take whatever the user typed in (hint: look at the html and see what ng-model correlates to on the input box),
     //pass that text to the postMessage method on the messageService object which will

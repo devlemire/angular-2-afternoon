@@ -203,13 +203,170 @@ angular.module('chatroom').controller('mainCtrl', function( $scope, mainSrvc ){
 
 ### Summary
 
-In this step, we'll modify the `HTML` to also display what time the message was created.
+In this step, we'll modify the `HTML` to also display what time the message was created. Each message object has a property called `createdAt` which is the time the message was created at.
+
+### Instructions
+
+* Open `index.html`.
+* Add the time the message was created at to the DOM.
+
+### Solution
+
+<details>
+
+<summary> <code> index.html </code> </summary>
+
+```html
+<!DOCTYPE HTML>
+<html ng-app="chatroom">
+  <head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body ng-controller="mainCtrl">
+    <div class="main-container">
+      <h1> DevMountain Chat Room </h1>
+      <form ng-submit="postMessage(message)">
+        <input class="form-control text-box" type="text" ng-model="message" placeholder="Message">
+      </form>
+      <div class="messages-container">
+        <p ng-repeat="message in messages ">
+          {{ message.message }} 
+
+          {{ message.createdAt }}
+        </p>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <!-- your scripts here -->
+    <script src="js/app.js"></script>
+    <script src="js/mainCtrl.js"></script>
+    <script src="js/mainSrvc.js"></script>
+  </body>
+</html>
+```
+
+</details>
 
 ## Step 5
 
 ### Summary
 
 In this step, we'll modify the `HTML` to make the messages sortable by the time they were created.
+
+### Instructions
+
+* Open `js/mainCtrl.js`.
+* Create a new `$scope` variable called `timeSort`.
+  * It should default to `"-"` ( so the newest messages show first ).
+* Open `index.html`.
+* Add a `select` element with a `ng-model` of `timeSort` next to the `input` element.
+  * This `select` element should have to `option` elements. One for ascending ("+") and one for descending ("-").
+* Modify the `ng-repeat` to include a sort on the `createdAt` property.
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+Let's begin by opening `js/mainCtrl.js` and a new `$scope` variable called `timeSort`. We'll use this as the `ng-model` for ascending or descending our sorting. Since we want to display the newest messages first, let's default `timeSort` to `"-"`.
+
+```js
+$scope.timeSort = "-";
+```
+
+We can then open `index.html` and use a `select` element with two `option` elements to control the sorting of our messages. Let's add it next to the `input` element. We'll use `timeSort` as the `ng-model` for the `select` element. Also, don't forget that the `option` elements will need `value` attributes so they can update the `ng-model`.
+
+```html
+<form ng-submit="postMessage(message)">
+  <input class="form-control text-box" type="text" ng-model="message" placeholder="Message">
+  <select ng-model="timeSort">
+    <option value="-">Newest</option>
+    <option value="+">Oldest</option>
+  </select>
+</form>
+```
+
+Now all we need to do is update the `ng-repeat` to have a `orderBy`. We can add this in using a `|`. Remember that `orderBy` ascendes or decsends by `+` or `-`. So if we want to order by the `createdAt` property, we'll need either `+createdAt` or `-createdAt`. We can make this dynamic using the `timeSort` `ng-model`. You'll need up with:
+
+```html
+<div class="messages-container">
+  <p ng-repeat="message in messages | orderBy:timeSort + message.createdAt">
+    {{ message.message }} 
+
+    {{ message.createdAt }}
+  </p>
+</div>
+```
+
+</details>
+
+### Solution
+
+<details>
+
+<summary> <code> js/mainCtrl.js </code> </summary>
+
+```js
+angular.module('chatroom').controller('mainCtrl', function( $scope, mainSrvc ){
+    mainSrvc.getMessages().then( function( response ) {
+      $scope.messages = response.data;
+    });
+
+    $scope.timeSort = "-";
+});
+```
+
+</details>
+
+<details>
+
+<summary> <code> index.html </code> </summary>
+
+```html
+<!DOCTYPE HTML>
+<html ng-app="chatroom">
+  <head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body ng-controller="mainCtrl">
+    <div class="main-container">
+      <h1> DevMountain Chat Room </h1>
+      <form ng-submit="postMessage(message)">
+        <input class="form-control text-box" type="text" ng-model="message" placeholder="Message">
+        <select ng-model="timeSort">
+          <option value="-">Newest</option>
+          <option value="+">Oldest</option>
+        </select>
+      </form>
+      <div class="messages-container">
+        <p ng-repeat="message in messages | orderBy:timeSort + message.createdAt">
+          {{ message.message }} 
+
+          {{ message.createdAt }}
+        </p>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <!-- your scripts here -->
+    <script src="js/app.js"></script>
+    <script src="js/mainCtrl.js"></script>
+    <script src="js/mainSrvc.js"></script>
+  </body>
+</html>
+```
+
+</details>
+
+## Black Diamond
+
+* Make the app look more professional using CSS.
 
 ## Contributions
 
