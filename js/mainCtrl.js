@@ -1,4 +1,4 @@
-angular.module('chatroom').controller('mainCtrl', function($scope){
+angular.module('chatroom').controller('mainCtrl', function( $scope ){
     //The getMessages function will call the getMessages method on the messageService object.
     //You'll then save the result of that request to your controller's $scope as messages ($scope.messages)
   

@@ -80,6 +80,60 @@ Let's begin by opening `index.html` and finding the `<!-- your scripts here -->`
 
 In this step, we'll modify our Angular service to fetch messages from a live API.
 
+### Instructions
+
+* Open `js/mainSrvc.js`.
+* Inject `$http` into the service.
+* Create a method called `getMessages` that `returns` a `GET` call to `https://practiceapi.devmountain.com/api/chats`.
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+Let's begin by opening `js/mainSrvc.js`. In order to make API calls, we'll need to inject `$http` into our Angular service. We can do this by adding `$http` as a parameter.
+
+```js
+angular.module('chatroom').service('mainSrvc', function( $http ) {
+
+});
+```
+
+Now that we have access to `$http` we can make a method on the service that fetches the messages from the DevMountain Chat API. Remember that we need to return this `$http` call so our controller can work with a promise and put the messages on `$scope` as soon as they are available.
+
+```js
+angular.module('chatroom').service('mainSrvc', function( $http ) {
+  this.getMessages = function() {
+    return $http({
+      method: 'GET',
+      url: 'https://practiceapi.devmountain.com/api/chats'
+    });
+  };
+});
+```
+
+</details>
+
+### Solution
+
+<details>
+
+<summary> <code> js/mainSrvc.js </code> </summary>
+
+```js
+angular.module('chatroom').service('mainSrvc', function( $http ) {
+  this.getMessages = function() {
+    return $http({
+      method: 'GET',
+      url: 'https://practiceapi.devmountain.com/api/chats'
+    });
+  };
+});
+```
+
+</details>
+
 ## Step 3
 
 ### Summary
