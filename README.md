@@ -274,7 +274,7 @@ In this step, we'll modify the `HTML` to make the messages sortable by the time 
 
 <br />
 
-Let's begin by opening `js/mainCtrl.js` and a new `$scope` variable called `timeSort`. We'll use this as the `ng-model` for ascending or descending our sorting. Since we want to display the newest messages first, let's default `timeSort` to `"-"`.
+Let's begin by opening `js/mainCtrl.js` and add a new `$scope` variable called `timeSort`. We'll use this as the `ng-model` for ascending or descending our sorting. Since we want to display the newest messages first, let's default `timeSort` to `"-"`.
 
 ```js
 $scope.timeSort = "-";
